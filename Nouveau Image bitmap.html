@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event PvP Minecraft</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: 'Rubik', sans-serif;
+      background: linear-gradient(135deg, #111, #1a1a1a);
+      color: white;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .box {
+      background-color: rgba(20, 20, 20, 0.95);
+      border-radius: 16px;
+      padding: 30px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2.5em;
+    }
+
+    h2 {
+      margin-top: 20px;
+    }
+
+    .red {
+      color: #ff4444;
+    }
+
+    .blue {
+      color: #00baff;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      background-color: #111;
+      color: #00ffe0;
+      font-family: 'Rubik', sans-serif;
+      font-size: 0.9rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 15px;
+      font-size: 1rem;
+      border-radius: 12px;
+      border: none;
+      background-color: #00bcd4;
+      color: white;
+      cursor: pointer;
+      font-family: 'Rubik', sans-serif;
+      transition: all 0.2s ease;
+      box-shadow: 0 5px 0 #007c91;
+    }
+
+    button:hover {
+      background-color: #0097a7;
+      transform: scale(1.05);
+    }
+
+    button:active {
+      box-shadow: none;
+      transform: translateY(4px);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .logo {
+      width: 300px;
+      margin-bottom: 20px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Son clic Minecraft -->
+  <audio id="clickSound" src="https://www.myinstants.com/media/sounds/minecraft_click.mp3" preload="auto"></audio>
+
+  <!-- Musique Minecraft douce avec volume réduit -->
+  <audio id="music" autoplay loop>
+    <source src="https://cdn.glitch.global/86c7e3b4-8422-4744-b8dc-eac7c5c8452c/Sweden%20-%20Minecraft.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    window.onload = function () {
+      const music = document.getElementById("music");
+      music.volume = 0.1; // volume très bas
+    };
+  </script>
+
+  <!-- Étape 1 -->
+  <div class="container" id="step1">
+    <div class="box">
+      <!-- Vraie image du logo Minecraft -->
+      <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png" alt="Minecraft Logo">
+      <h1>Event PvP Minecraft</h1>
+      <h2>Participants :</h2>
+      <p>Tomlwsm, Lix, Chanax, RedBlack, Amara100</p>
+      <h2 class="blue">Stuff Abonné</h2>
+      <textarea id="stuffAbo" placeholder="Décris le stuff abonné..."></textarea>
+      <h2 class="red">Stuff YouTuber</h2>
+      <textarea id="stuffYt" placeholder="Décris le stuff YouTuber..."></textarea>
+      <button onclick="playClick(); goToStep2()">Continuer</button>
+    </div>
+  </div>
+
+  <!-- Étape 2 -->
+  <div class="container hidden" id="step2">
+    <div class="box">
+      <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png" alt="Minecraft Logo">
+      <h2>📸 Prends un screen de cette page</h2>
+      <p>Et poste-le dans le Discord de l'event</p>
+      <button onclick="playClick(); goToStep1()">Retour</button>
+      <button onclick="playClick(); confirm()">Confirmer</button>
+    </div>
+  </div>
+
+  <script>
+    function playClick() {
+      const sound = document.getElementById('clickSound');
+      sound.currentTime = 0;
+      sound.play();
+    }
+
+    function goToStep2() {
+      document.getElementById('step1').classList.add('hidden');
+      document.getElementById('step2').classList.remove('hidden');
+    }
+
+    function goToStep1() {
+      document.getElementById('step2').classList.add('hidden');
+      document.getElementById('step1').classList.remove('hidden');
+    }
+
+    function confirm() {
+      alert("Merci ! N'oublie pas de poster ton screen sur Discord !");
+    }
+  </script>
+</body>
+</html>
