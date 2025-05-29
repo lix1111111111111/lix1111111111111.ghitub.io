@@ -2,179 +2,216 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Event PvP Minecraft</title>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
   <style>
-    html, body {
+    body {
       margin: 0;
       padding: 0;
-      height: 100%;
-      width: 100%;
-      font-family: 'Rubik', sans-serif;
-      background: linear-gradient(135deg, #111, #1a1a1a);
+      font-family: 'Pixelify Sans', sans-serif;
+      background: linear-gradient(-45deg, #0d0d0d, #1c1c1c, #0d0d0d);
+      background-size: 400% 400%;
+      animation: gradientBG 20s ease infinite;
       color: white;
       overflow: hidden;
+      cursor: url('https://cur.cursors-4u.net/games/gam-10/gam990.cur'), auto;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
 
     .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      padding: 20px;
       text-align: center;
-    }
-
-    .box {
-      background-color: rgba(20, 20, 20, 0.95);
-      border-radius: 16px;
-      padding: 30px;
-      width: 90%;
       max-width: 600px;
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
-      animation: fadeIn 1s ease-in-out;
+      margin: 5vh auto;
+      padding: 30px;
+      border: 2px solid #00ffcc;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00ffcc, 0 0 40px #00ccff inset;
+      background-color: rgba(0, 0, 0, 0.7);
+      position: relative;
+      z-index: 1;
     }
 
     h1 {
-      font-size: 2.5em;
-    }
-
-    h2 {
-      margin-top: 20px;
-    }
-
-    .red {
-      color: #ff4444;
-    }
-
-    .blue {
-      color: #00baff;
-    }
-
-    textarea {
-      width: 100%;
-      height: 100px;
-      margin: 10px 0;
-      padding: 10px;
-      border-radius: 10px;
-      border: none;
-      background-color: #111;
-      color: #00ffe0;
-      font-family: 'Rubik', sans-serif;
-      font-size: 0.9rem;
-    }
-
-    button {
-      width: 100%;
-      padding: 15px;
-      margin-top: 15px;
-      font-size: 1rem;
-      border-radius: 12px;
-      border: none;
-      background-color: #00bcd4;
-      color: white;
-      cursor: pointer;
-      font-family: 'Rubik', sans-serif;
-      transition: all 0.2s ease;
-      box-shadow: 0 5px 0 #007c91;
-    }
-
-    button:hover {
-      background-color: #0097a7;
-      transform: scale(1.05);
-    }
-
-    button:active {
-      box-shadow: none;
-      transform: translateY(4px);
-    }
-
-    .hidden {
-      display: none;
+      text-shadow: 0 0 10px #00ccff, 0 0 20px #00ffcc;
     }
 
     .logo {
-      width: 300px;
-      margin-bottom: 20px;
-      animation: float 3s ease-in-out infinite;
+      width: 250px;
+      animation: float 3s infinite ease-in-out, fadeIn 2s ease;
     }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      0% {transform: translateY(0);}
+      50% {transform: translateY(-10px);}
+      100% {transform: translateY(0);}
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .field {
+      margin: 20px 0;
+      animation: fadeInUp 0.6s ease both;
+    }
+
+    @keyframes fadeInUp {
+      0% {opacity: 0; transform: translateY(20px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+
+    textarea {
+      width: 90%;
+      height: 100px;
+      resize: none;
+      padding: 10px;
+      font-family: 'Pixelify Sans', sans-serif;
+      font-size: 1rem;
+      background-color: #121212;
+      border: 2px solid #00ccff;
+      color: white;
+      transition: box-shadow 0.3s ease;
+    }
+
+    textarea:hover {
+      box-shadow: 0 0 10px #00ccff;
+    }
+
+    .btn {
+      margin: 10px;
+      padding: 10px 20px;
+      background-color: #00cc66;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 10px #00ff66;
+    }
+
+    .btn:hover {
+      background-color: #2e7031;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00ff66;
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    canvas#particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
     }
   </style>
 </head>
 <body>
-  <!-- Son clic Minecraft -->
-  <audio id="clickSound" src="https://www.myinstants.com/media/sounds/minecraft_click.mp3" preload="auto"></audio>
+  <canvas id="particles"></canvas>
+  <div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/47/Minecraft_logo.svg" class="logo" alt="Minecraft Logo" />
+    <h1>Event PvP Minecraft</h1>
+    <p><span style="color: red;">YouTubeurs :</span> Tomlwsm, Lix, Chanax, RedBlack, Amara100</p>
 
-  <!-- Musique Minecraft douce avec volume réduit -->
-  <audio id="music" autoplay loop>
-    <source src="https://cdn.glitch.global/86c7e3b4-8422-4744-b8dc-eac7c5c8452c/Sweden%20-%20Minecraft.mp3" type="audio/mp3">
+    <div class="field">
+      <label for="stuffAbo" style="color: #00aaff;">Stuff Abonné :</label><br>
+      <textarea id="stuffAbo"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="stuffYt" style="color: red;">Stuff YouTubeur :</label><br>
+      <textarea id="stuffYt"></textarea>
+    </div>
+
+    <button class="btn" onclick="envoyer()">Continuer</button>
+  </div>
+
+  <audio autoplay loop volume="0.1">
+    <source src="https://dl.sndup.net/s5q4/Minecraft%20Calm%201.ogg" type="audio/ogg">
   </audio>
 
   <script>
-    window.onload = function () {
-      const music = document.getElementById("music");
-      music.volume = 0.1; // volume très bas
-    };
-  </script>
+    function envoyer() {
+      const stuffAbo = document.getElementById('stuffAbo').value;
+      const stuffYt = document.getElementById('stuffYt').value;
 
-  <!-- Étape 1 -->
-  <div class="container" id="step1">
-    <div class="box">
-      <!-- Vraie image du logo Minecraft -->
-      <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png" alt="Minecraft Logo">
-      <h1>Event PvP Minecraft</h1>
-      <h2>Participants :</h2>
-      <p>Tomlwsm, Lix, Chanax, RedBlack, Amara100</p>
-      <h2 class="blue">Stuff Abonné</h2>
-      <textarea id="stuffAbo" placeholder="Décris le stuff abonné..."></textarea>
-      <h2 class="red">Stuff YouTuber</h2>
-      <textarea id="stuffYt" placeholder="Décris le stuff YouTuber..."></textarea>
-      <button onclick="playClick(); goToStep2()">Continuer</button>
-    </div>
-  </div>
+      fetch("https://discord.com/api/webhooks/1377625856725356554/5F0SWQ6yyVPArbSFX3p2af9b0_QVFAzhi-kEC-l2lOPFRHbHbzRJyTUoqoKw6EjFhsz3", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          content: `🎮 **Nouveau Stuff envoyé !**\n📘 **Abonné :** ${stuffAbo}\n📕 **YouTubeur :** ${stuffYt}`
+        })
+      });
 
-  <!-- Étape 2 -->
-  <div class="container hidden" id="step2">
-    <div class="box">
-      <img class="logo" src="https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png" alt="Minecraft Logo">
-      <h2>📸 Prends un screen de cette page</h2>
-      <p>Et poste-le dans le Discord de l'event</p>
-      <button onclick="playClick(); goToStep1()">Retour</button>
-      <button onclick="playClick(); confirm()">Confirmer</button>
-    </div>
-  </div>
-
-  <script>
-    function playClick() {
-      const sound = document.getElementById('clickSound');
-      sound.currentTime = 0;
-      sound.play();
+      alert("Merci ! Tes informations ont été envoyées.");
     }
 
-    function goToStep2() {
-      document.getElementById('step1').classList.add('hidden');
-      document.getElementById('step2').classList.remove('hidden');
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 0.5 - 0.25;
+        this.speedY = Math.random() * 0.5 - 0.25;
+        this.alpha = Math.random() * 0.5 + 0.3;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.fillStyle = `rgba(255,255,255,${this.alpha})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
 
-    function goToStep1() {
-      document.getElementById('step2').classList.add('hidden');
-      document.getElementById('step1').classList.remove('hidden');
+    for (let i = 0; i < 100; i++) {
+      particles.push(new Particle());
     }
 
-    function confirm() {
-      alert("Merci ! N'oublie pas de poster ton screen sur Discord !");
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animate);
     }
+    animate();
   </script>
 </body>
 </html>
